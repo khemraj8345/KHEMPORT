@@ -6,9 +6,11 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     line-height: 1.6;
-    color: #333;
+    color: #222;
+    background: #f6f8fb;
+    -webkit-font-smoothing:antialiased;
     scroll-behavior: smooth;
 }
 
@@ -20,13 +22,14 @@ body {
 
 /* Header */
 header {
-    background: #333;
+    background: transparent;
     color: #fff;
-    padding: 1rem 0;
+    padding: 1rem 0.5rem;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 100;
+    z-index: 200;
+    transition: background 0.25s ease, box-shadow 0.25s ease, padding 0.2s ease;
 }
 
 nav {
@@ -46,31 +49,79 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
+    gap: 1rem;
 }
 
 nav ul li {
-    margin-left: 2rem;
+    margin-left: 0;
 }
 
 nav ul li a {
-    color: #fff;
+    color: inherit;
     text-decoration: none;
-    transition: color 0.3s;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: background 0.18s ease, color 0.18s ease;
 }
 
 nav ul li a:hover {
-    color: #f4a261;
+    background: rgba(244,162,97,0.12);
+    color: #f07a2d;
 }
+
+.nav-active a {
+    background: rgba(240,122,45,0.14);
+    color: #f07a2d;
+}
+
+.header-solid {
+    background: #ffffff;
+    box-shadow: 0 6px 24px rgba(15,23,42,0.06);
+    color: #111;
+    padding: 0.6rem 0.5rem;
+}
+
+/* mobile hamburger */
+.nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after{
+    display:block;
+    background:#111;
+    height:2px;
+    width:20px;
+    border-radius:2px;
+    transition: transform .2s ease, opacity .2s ease;
+}
+.nav-toggle span::before,
+.nav-toggle span::after{
+    content:'';
+    position:relative;
+}
+.nav-toggle.open span{
+    transform: rotate(45deg);
+}
+.nav-toggle.open span::before{transform: rotate(90deg) translateX(0); opacity:0}
+
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6f86d6 0%, #48c6ef 100%);
     color: #fff;
-    height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 6rem 1rem 4rem;
 }
 
 .hero-content h1 {
@@ -85,21 +136,26 @@ nav ul li a:hover {
 
 .btn {
     display: inline-block;
-    background: #f4a261;
+    background: linear-gradient(90deg,#ffb86b,#ff7a59);
     color: #fff;
-    padding: 0.8rem 2rem;
+    padding: 0.7rem 1.6rem;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(255,122,89,0.16);
+    transition: transform 0.16s ease, box-shadow .16s ease;
 }
 
 .btn:hover {
-    background: #e76f51;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(255,122,89,0.18);
 }
 
 /* Sections */
 section {
-    padding: 5rem 0;
+    padding: 4rem 0;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
 }
 
 section h2 {
@@ -111,7 +167,10 @@ section h2 {
 
 /* About */
 #about {
-    background: #f8f9fa;
+    background: #fff;
+    border-radius: 12px;
+    margin: 1rem auto;
+    box-shadow: 0 6px 28px rgba(15,23,42,0.04);
 }
 
 .profile-img {
@@ -131,16 +190,17 @@ section h2 {
 }
 
 .skill {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 5px;
+    background: linear-gradient(180deg,#ffffff,#fbfbff);
+    padding: 1.2rem 1rem;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    box-shadow: 0 8px 24px rgba(45,57,76,0.06);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
 
 .skill:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 40px rgba(45,57,76,0.08);
 }
 
 /* Projects */
@@ -152,15 +212,16 @@ section h2 {
 }
 
 .project {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    background: linear-gradient(180deg,#fff,#fbfdff);
+    padding: 1.6rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.05);
+    transition: transform 0.28s ease, box-shadow .28s ease;
 }
 
 .project:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 22px 50px rgba(15,23,42,0.08);
 }
 
 .project h3 {
@@ -169,7 +230,10 @@ section h2 {
 
 /* Contact */
 #contact {
-    background: #f8f9fa;
+    background: #fff;
+    border-radius: 12px;
+    margin: 1rem auto;
+    box-shadow: 0 6px 28px rgba(15,23,42,0.04);
 }
 
 form {
@@ -181,8 +245,8 @@ input, textarea {
     width: 100%;
     padding: 1rem;
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #e6e9ef;
+    border-radius: 10px;
     font-size: 1rem;
 }
 
@@ -194,17 +258,18 @@ textarea {
 button[type="submit"] {
     width: 100%;
     padding: 1rem;
-    background: #333;
+    background: linear-gradient(90deg,#4f46e5,#06b6d4);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: transform .12s ease, box-shadow .12s ease;
 }
 
 button[type="submit"]:hover {
-    background: #555;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(6,182,212,0.12);
 }
 
 /* Footer */
@@ -217,19 +282,15 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    nav ul {
-        display: none;
-    }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .hero-content p {
-        font-size: 1rem;
-    }
-    
-    section h2 {
-        font-size: 2rem;
-    }
+    .nav-toggle { display:flex }
+    nav ul { position: fixed; top:64px; right:12px; background: #fff; color:#111; flex-direction:column; gap:0; padding:8px; border-radius:10px; box-shadow:0 8px 30px rgba(15,23,42,0.08); display:none }
+    nav ul.show { display:flex }
+    nav ul li a { color:#0f172a; padding: 0.65rem 1rem }
+
+    .hero-content h1 { font-size: 2rem }
+    .hero-content p { font-size: 1rem }
+    section h2 { font-size: 2rem }
 }
+
+/* utility: visible section */
+.is-visible { opacity:1; transform: translateY(0) }

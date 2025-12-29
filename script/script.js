@@ -1,38 +1,77 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+document.addEventListener('DOMContentLoaded', () => {
+    // header behavior: solid background on scroll
+    const header = document.querySelector('header');
+    const onScrollHeader = () => {
+        if (!header) return;
+        if (window.scrollY > 40) header.classList.add('header-solid'); else header.classList.remove('header-solid');
+    };
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader);
+
+    // mobile nav toggle
+    const navToggle = document.createElement('button');
+    navToggle.className = 'nav-toggle';
+    navToggle.setAttribute('aria-label','Toggle navigation');
+    navToggle.innerHTML = '<span></span>';
+    const nav = document.querySelector('nav');
+    if (nav) nav.insertBefore(navToggle, nav.querySelector('ul'));
+
+    const navList = document.querySelector('nav ul');
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        if (navList) navList.classList.toggle('show');
+    });
+
+    // close mobile nav when clicking a link
+    if (navList) {
+        navList.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                navList.classList.remove('show');
+                navToggle.classList.remove('open');
+            });
+        });
+    }
+
+    // Smooth scroll for same-page anchors only
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const target = this.getAttribute('href');
+            if (!target || target === '#') return;
+            const el = document.querySelector(target);
+            if (!el) return; // let normal navigation happen for cross-page links
+            e.preventDefault();
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
-});
 
-// Simple form submission (for demo purposes)
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
-});
+    // Intersection Observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-// Add some animation on scroll
-window.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
+    // Active nav link based on current page or hash
+    const links = document.querySelectorAll('nav ul li a');
+    const path = window.location.pathname.split('/').pop();
+    links.forEach(a => {
+        const href = a.getAttribute('href');
+        if (!href) return;
+        if (href === path || (href === window.location.hash && window.location.hash !== '')) {
+            a.parentElement && a.parentElement.classList.add('nav-active');
         }
     });
-});
 
-// Initial styles for animation
-document.addEventListener('DOMContentLoaded', function() {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s, transform 0.6s';
-    });
+    // Safe form handler
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you — message received! I will reply soon.');
+            form.reset();
+        });
+    }
 });
