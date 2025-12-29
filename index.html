@@ -74,6 +74,13 @@
         </div>
     </section>
 
+    <section id="games" class="game-section">
+        <div class="container">
+            <h2>Games</h2>
+            <div id="tic-tac-toe-root"></div>
+        </div>
+    </section>
+
     <section id="contact">
         <div class="container">
             <h2>Contact Me</h2>
@@ -89,6 +96,12 @@
     <footer>
         <p>&copy; 2025 My Portfolio. All rights reserved.</p>
     </footer>
+
+    <!-- React + Babel for embedded JSX (no build step) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="script/tic_tac_toe.jsx"></script>
 
     <script src="script/script.js"></script>
 </body>

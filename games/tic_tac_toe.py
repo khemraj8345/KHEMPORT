@@ -1,196 +1,147 @@
-import React, { useState, useEffect } from 'react';
+"""
+Tic Tac Toe Game with AI opponent using Minimax algorithm
+"""
 
-const TicTacToe = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isPlayerTurn, setIsPlayerTurn] = useState(true);
-  const [gameOver, setGameOver] = useState(false);
-  const [winner, setWinner] = useState(null);
-  const [scores, setScores] = useState({ player: 0, ai: 0, draws: 0 });
-
-  const checkWinner = (squares) => {
-    const lines = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
-    ];
+def check_winner(board):
+    """Check if there's a winner on the board"""
+    lines = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+    ]
     
-    for (let line of lines) {
-      const [a, b, c] = line;
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  };
+    for line in lines:
+        a, b, c = line
+        if board[a] and board[a] == board[b] == board[c]:
+            return board[a]
+    return None
 
-  const isBoardFull = (squares) => {
-    return squares.every(square => square !== null);
-  };
+def is_board_full(board):
+    """Check if the board is full"""
+    return all(cell is not None for cell in board)
 
-  const minimax = (squares, depth, isMaximizing) => {
-    const result = checkWinner(squares);
+def minimax(board, depth, is_maximizing):
+    """Minimax algorithm for AI decision making"""
+    result = check_winner(board)
     
-    if (result === 'O') return 10 - depth;
-    if (result === 'X') return depth - 10;
-    if (isBoardFull(squares)) return 0;
+    if result == 'O':
+        return 10 - depth
+    if result == 'X':
+        return depth - 10
+    if is_board_full(board):
+        return 0
 
-    if (isMaximizing) {
-      let bestScore = -Infinity;
-      for (let i = 0; i < 9; i++) {
-        if (squares[i] === null) {
-          squares[i] = 'O';
-          let score = minimax(squares, depth + 1, false);
-          squares[i] = null;
-          bestScore = Math.max(score, bestScore);
-        }
-      }
-      return bestScore;
-    } else {
-      let bestScore = Infinity;
-      for (let i = 0; i < 9; i++) {
-        if (squares[i] === null) {
-          squares[i] = 'X';
-          let score = minimax(squares, depth + 1, true);
-          squares[i] = null;
-          bestScore = Math.min(score, bestScore);
-        }
-      }
-      return bestScore;
-    }
-  };
+    if is_maximizing:
+        best_score = float('-inf')
+        for i in range(9):
+            if board[i] is None:
+                board[i] = 'O'
+                score = minimax(board, depth + 1, False)
+                board[i] = None
+                best_score = max(score, best_score)
+        return best_score
+    else:
+        best_score = float('inf')
+        for i in range(9):
+            if board[i] is None:
+                board[i] = 'X'
+                score = minimax(board, depth + 1, True)
+                board[i] = None
+                best_score = min(score, best_score)
+        return best_score
 
-  const getBestMove = (squares) => {
-    let bestScore = -Infinity;
-    let bestMove = null;
+def get_best_move(board):
+    """Find the best move for the AI"""
+    best_score = float('-inf')
+    best_move = None
 
-    for (let i = 0; i < 9; i++) {
-      if (squares[i] === null) {
-        squares[i] = 'O';
-        let score = minimax(squares, 0, false);
-        squares[i] = null;
-        if (score > bestScore) {
-          bestScore = score;
-          bestMove = i;
-        }
-      }
-    }
-    return bestMove;
-  };
+    for i in range(9):
+        if board[i] is None:
+            board[i] = 'O'
+            score = minimax(board, 0, False)
+            board[i] = None
+            if score > best_score:
+                best_score = score
+                best_move = i
+    return best_move
 
-  useEffect(() => {
-    if (!isPlayerTurn && !gameOver) {
-      const timer = setTimeout(() => {
-        const newBoard = [...board];
-        const bestMove = getBestMove(newBoard);
-        if (bestMove !== null) {
-          newBoard[bestMove] = 'O';
-          setBoard(newBoard);
-          
-          const gameWinner = checkWinner(newBoard);
-          if (gameWinner) {
-            setWinner(gameWinner);
-            setGameOver(true);
-            setScores(prev => ({ ...prev, ai: prev.ai + 1 }));
-          } else if (isBoardFull(newBoard)) {
-            setGameOver(true);
-            setScores(prev => ({ ...prev, draws: prev.draws + 1 }));
-          } else {
-            setIsPlayerTurn(true);
-          }
-        }
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isPlayerTurn, gameOver, board]);
+def display_board(board):
+    """Display the board in a formatted way"""
+    print("\n")
+    for i in range(3):
+        row = []
+        for j in range(3):
+            index = i * 3 + j
+            cell = board[index] if board[index] else str(index + 1)
+            row.append(cell)
+        print(f" {row[0]} | {row[1]} | {row[2]} ")
+        if i < 2:
+            print("-----------")
+    print("\n")
 
-  const handleClick = (index) => {
-    if (board[index] || gameOver || !isPlayerTurn) return;
+def play_game():
+    """Main game loop"""
+    board = [None] * 9
+    player_score = 0
+    ai_score = 0
+    draws = 0
 
-    const newBoard = [...board];
-    newBoard[index] = 'X';
-    setBoard(newBoard);
+    print("Welcome to Tic Tac Toe!")
+    print("You are X, AI is O")
+    print("Enter position (1-9) to make your move\n")
 
-    const gameWinner = checkWinner(newBoard);
-    if (gameWinner) {
-      setWinner(gameWinner);
-      setGameOver(true);
-      setScores(prev => ({ ...prev, player: prev.player + 1 }));
-    } else if (isBoardFull(newBoard)) {
-      setGameOver(true);
-      setScores(prev => ({ ...prev, draws: prev.draws + 1 }));
-    } else {
-      setIsPlayerTurn(false);
-    }
-  };
-
-  const resetGame = () => {
-    setBoard(Array(9).fill(null));
-    setIsPlayerTurn(true);
-    setGameOver(false);
-    setWinner(null);
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
-        <h1 className="text-4xl font-bold text-center mb-2 text-gray-800">Tic Tac Toe</h1>
-        <p className="text-center text-gray-600 mb-6">Player (X) vs AI (O)</p>
+    while True:
+        display_board(board)
         
-        <div className="grid grid-cols-3 gap-2 mb-6 bg-gray-200 p-3 rounded-lg">
-          <div className="text-center p-3 bg-blue-100 rounded-lg">
-            <div className="text-2xl font-bold text-blue-600">{scores.player}</div>
-            <div className="text-xs text-gray-600">Player</div>
-          </div>
-          <div className="text-center p-3 bg-gray-100 rounded-lg">
-            <div className="text-2xl font-bold text-gray-600">{scores.draws}</div>
-            <div className="text-xs text-gray-600">Draws</div>
-          </div>
-          <div className="text-center p-3 bg-red-100 rounded-lg">
-            <div className="text-2xl font-bold text-red-600">{scores.ai}</div>
-            <div className="text-xs text-gray-600">AI</div>
-          </div>
-        </div>
+        # Player move
+        while True:
+            try:
+                move = int(input("Your move (1-9): ")) - 1
+                if 0 <= move < 9 and board[move] is None:
+                    board[move] = 'X'
+                    break
+                else:
+                    print("Invalid move! Try again.")
+            except ValueError:
+                print("Please enter a number between 1 and 9")
 
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          {board.map((cell, index) => (
-            <button
-              key={index}
-              onClick={() => handleClick(index)}
-              className={`h-24 text-4xl font-bold rounded-xl transition-all duration-200 ${
-                cell === 'X' ? 'bg-blue-500 text-white' :
-                cell === 'O' ? 'bg-red-500 text-white' :
-                'bg-gray-100 hover:bg-gray-200 active:scale-95'
-              } ${!isPlayerTurn && !gameOver ? 'cursor-not-allowed opacity-50' : ''}`}
-              disabled={!isPlayerTurn || gameOver}
-            >
-              {cell}
-            </button>
-          ))}
-        </div>
+        winner = check_winner(board)
+        if winner == 'X':
+            display_board(board)
+            print("🎉 You Win!")
+            player_score += 1
+        elif is_board_full(board):
+            display_board(board)
+            print("🤝 Draw!")
+            draws += 1
+        else:
+            # AI move
+            print("AI is thinking...")
+            best_move = get_best_move(board)
+            if best_move is not None:
+                board[best_move] = 'O'
 
-        {gameOver && (
-          <div className="text-center mb-4">
-            <p className="text-2xl font-bold text-gray-800 mb-2">
-              {winner ? (winner === 'X' ? '🎉 You Win!' : '🤖 AI Wins!') : '🤝 Draw!'}
-            </p>
-          </div>
-        )}
+            winner = check_winner(board)
+            if winner == 'O':
+                display_board(board)
+                print("🤖 AI Wins!")
+                ai_score += 1
+            elif is_board_full(board):
+                display_board(board)
+                print("🤝 Draw!")
+                draws += 1
+            else:
+                continue
 
-        {!gameOver && (
-          <p className="text-center text-lg font-semibold text-gray-700 mb-4">
-            {isPlayerTurn ? '👤 Your turn' : '🤖 AI is thinking...'}
-          </p>
-        )}
+        # Show scores
+        print(f"Scores - You: {player_score}, AI: {ai_score}, Draws: {draws}")
+        
+        play_again = input("Play again? (yes/no): ").lower()
+        if play_again != 'yes' and play_again != 'y':
+            print("Thanks for playing!")
+            break
+        
+        board = [None] * 9
 
-        <button
-          onClick={resetGame}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-200 active:scale-95"
-        >
-          New Game
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default TicTacToe;
+if __name__ == "__main__":
+    play_game()
