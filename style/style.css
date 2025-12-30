@@ -633,6 +633,7 @@ section h2::after {
 
 /* About Section Refactor */
 #about .container {
+    background-color: #9b59b6;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -988,7 +989,6 @@ body.dark-mode .profile-img {
 .skill {
 
     background: var(--card-bg);
-    background-color: #c0392b;
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 16px;
