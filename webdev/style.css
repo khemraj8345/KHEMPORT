@@ -1,0 +1,173 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.navbar nav a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.navbar nav a:hover {
+  opacity: 1;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px;
+  overflow: hidden;
+}
+
+/* Profile Image - On Top of Background */
+.profile-image {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.profile-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Background Image - Behind Profile Picture */
+.bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../accesaries/background_01.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+/* Dark overlay for readability */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  max-width: 600px;
+  color: #ffffff;
+  z-index: 3;
+  text-align: left;
+  margin-left: auto;
+  padding-right: 60px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  color: rgba(239, 230, 235, 0.842);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn.primary {
+  background: #f59e0b;
+  color: #000;
+}
+
+.btn.primary:hover {
+  background: #d97706;
+}
+
+.btn.secondary {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+
+.btn.secondary:hover {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .navbar {
+    padding: 20px 30px;
+  }
+
+  .hero {
+    padding: 0 30px;
+  }
+}
