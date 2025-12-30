@@ -1,44 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
 </head>
+
 <body>
     <header>
         <nav>
             <div class="logo">My Portfolio</div>
             <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="skills.html">Skills</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="yash.html">Yash</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button id="theme-toggle" aria-label="Toggle Dark Mode">☀</button></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
+        <!-- Sunny Day Background (Visible in Light Mode) -->
+        <div id="sunny-day" class="sunny-day-bg">
+            <div class="sun"></div>
+            <div class="sky-container" id="day-sky"></div> <!-- Container for clouds -->
+            <div class="grass" id="meadow"></div> <!-- Container for flowers -->
+        </div>
+
+        <!-- Night Sky Background (Visible in Dark Mode) -->
+        <div id="sky" class="night-sky-bg">
+            <div class="moon"></div>
+            <div class="ground"></div>
+            <div class="shooting-star"></div>
+        </div>
+
         <div class="hero-content">
             <h1>Hello, I'm Yash kumar sahu</h1>
             <p>A passionate web and python developer creating amazing things.</p>
-            <a href="contact.html" class="btn">Get In Touch</a>
+            <a href="#contact" class="btn horror-btn">Get In Touch</a>
         </div>
     </section>
 
     <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Welcome to my portfolio! I'm a beginner python and web dewloper I love coding.</p>
-            <img src="accesaries/yash.jpg" alt="Profile Picture" class="profile-img">
+        <div class="container about-content">
+            <div class="about-left">
+                <h2>About Me</h2>
+                <img src="accesaries/yash.jpg" alt="Profile Picture" class="profile-img">
+            </div>
+            <div class="about-right">
+                <p>Welcome to my portfolio! I'm a beginner python and web dewloper I love coding.</p>
+            </div>
         </div>
     </section>
 
     <section id="skills">
-        <div class="container">
+        <!-- Space Background -->
+        <div class="space-container">
+            <div class="space-stars" id="space-stars"></div>
+
+            <div class="planet planet-1"></div>
+            <div class="planet planet-2"></div>
+            <div class="planet planet-3"></div>
+            <div class="space-moon"></div>
+
+            <div class="rocket" id="rocket">
+                <div class="rocket-nose"></div>
+                <div class="rocket-body"></div>
+                <div class="rocket-window"></div>
+                <div class="rocket-fin left"></div>
+                <div class="rocket-fin right"></div>
+                <div class="flame">
+                    <div class="flame-part"></div>
+                    <div class="flame-part"></div>
+                    <div class="flame-part"></div>
+                </div>
+            </div>
+            <div class="space-info">Click the rocket! 🚀</div>
+        </div>
+
+        <div class="container relative-content">
             <h2>My Skills</h2>
             <div class="skills-grid">
                 <div class="skill">HTML</div>
@@ -57,14 +106,13 @@
             <div class="projects-grid">
                 <div class="project">
                     <h3>Project 1</h3>
-                    <p>This is tic_tac_toe game created by using minmax alogirithm.
-                    </p>
+                    <p>This is Tic Tac Toe Game created by using minmax alogirithm.</p>
                     <a href="tic_tac_toe.html" class="btn">View Project</a>
                 </div>
                 <div class="project">
                     <h3>Project 2</h3>
-                    <p>Description of project 2.</p>
-                    <a href="#" class="btn">View Project</a>
+                    <p>My Web Development Website.</p>
+                    <a href="../webdev/index.html" class="btn">View Project</a>
                 </div>
                 <div class="project">
                     <h3>Project 3</h3>
@@ -97,4 +145,5 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="script/script.js"></script>
 </body>
+
 </html>

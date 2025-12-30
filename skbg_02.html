@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synesthetic Sound Painter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            cursor: none;
+        }
+
+        #canvas {
+            display: block;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
+        }
+
+        .cursor {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transform: translate(-50%, -50%);
+            filter: blur(10px);
+        }
+
+
+
+        .mode-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+        }
+
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-align: center;
+            animation: fadeInOut 4s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="cursor"></div>
+    <div class="cursor-glow"></div>
+
+
+
+    <div class="mode-indicator" id="modeIndicator">🎨 Paint Mode</div>
+
+    <div class="instructions">
+        Click and drag to paint • Space to burst • M to change mode
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const cursor = document.querySelector('.cursor');
+        const cursorGlow = document.querySelector('.cursor-glow');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Audio context
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let isAudioStarted = false;
+
+        function startAudio() {
+            if (!isAudioStarted && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+                isAudioStarted = true;
+            }
+        }
+
+        // Particle system
+        const particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+        let isDrawing = false;
+        let hue = 0;
+        let mode = 'paint'; // paint, burst, wave
+
+        // Settings
+        let particleSize = 5;
+        let particleCount = 15;
+        let gravity = 0.1;
+
+        class Particle {
+            constructor(x, y, color, vx, vy, size, frequency) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.vx = vx;
+                this.vy = vy;
+                this.size = size;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.02 + 0.005;
+                this.frequency = frequency;
+                this.trail = [];
+                this.maxTrail = 10;
+            }
+
+            update() {
+                this.trail.push({ x: this.x, y: this.y, alpha: this.alpha });
+                if (this.trail.length > this.maxTrail) {
+                    this.trail.shift();
+                }
+
+                this.vy += gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+                this.size *= 0.99;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -0.8;
+                if (this.y > canvas.height) {
+                    this.y = canvas.height;
+                    this.vy *= -0.7;
+                }
+            }
+
+            draw() {
+                // Draw trail
+                this.trail.forEach((point, index) => {
+                    const trailAlpha = (index / this.trail.length) * point.alpha;
+                    ctx.fillStyle = `hsla(${this.color}, 100%, 50%, ${trailAlpha * 0.3})`;
+                    ctx.beginPath();
+                    ctx.arc(point.x, point.y, this.size * 0.5, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Draw particle
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                gradient.addColorStop(0, `hsla(${this.color}, 100%, 70%, ${this.alpha})`);
+                gradient.addColorStop(0.5, `hsla(${this.color}, 100%, 50%, ${this.alpha * 0.8})`);
+                gradient.addColorStop(1, `hsla(${this.color}, 100%, 30%, 0)`);
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Glow effect
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = `hsl(${this.color}, 100%, 50%)`;
+                ctx.fillStyle = `hsla(${this.color}, 100%, 50%, ${this.alpha * 0.5})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            isDead() {
+                return this.alpha <= 0 || this.size < 0.5;
+            }
+        }
+
+        function playNote(frequency, duration = 0.1) {
+            startAudio();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + duration);
+        }
+
+        function createParticles(x, y, count) {
+            const frequency = 200 + (y / canvas.height) * 600;
+            playNote(frequency, 0.15);
+
+            for (let i = 0; i < count; i++) {
+                let vx, vy;
+
+                if (mode === 'paint') {
+                    vx = (Math.random() - 0.5) * 2;
+                    vy = (Math.random() - 0.5) * 2;
+                } else if (mode === 'burst') {
+                    const angle = (Math.PI * 2 * i) / count;
+                    const speed = Math.random() * 3 + 2;
+                    vx = Math.cos(angle) * speed;
+                    vy = Math.sin(angle) * speed;
+                } else { // wave
+                    vx = Math.cos(i * 0.5) * 3;
+                    vy = Math.sin(i * 0.5) * 3;
+                }
+
+                particles.push(new Particle(
+                    x,
+                    y,
+                    hue,
+                    vx,
+                    vy,
+                    particleSize + Math.random() * 3,
+                    frequency
+                ));
+            }
+
+            hue = (hue + 3) % 360;
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
+
+                if (particle.isDead()) {
+                    particles.splice(index, 1);
+                }
+            });
+
+            if (isDrawing) {
+                createParticles(mouseX, mouseY, particleCount);
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Event listeners
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            startAudio();
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+            cursorGlow.style.left = mouseX + 'px';
+            cursorGlow.style.top = mouseY + 'px';
+            
+            const cursorHue = (mouseY / canvas.height) * 360;
+            cursor.style.borderColor = `hsl(${cursorHue}, 100%, 50%)`;
+            cursorGlow.style.background = `radial-gradient(circle, hsla(${cursorHue}, 100%, 50%, 0.8) 0%, transparent 70%)`;
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                startAudio();
+                for (let i = 0; i < 50; i++) {
+                    createParticles(mouseX, mouseY, 5);
+                }
+            }
+            if (e.key === 'm' || e.key === 'M') {
+                const modes = ['paint', 'burst', 'wave'];
+                const currentIndex = modes.indexOf(mode);
+                mode = modes[(currentIndex + 1) % modes.length];
+                updateModeIndicator();
+            }
+        });
+
+
+
+        function updateModeIndicator() {
+            const icons = { paint: '🎨', burst: '💥', wave: '🌊' };
+            const names = { paint: 'Paint', burst: 'Burst', wave: 'Wave' };
+            document.getElementById('modeIndicator').textContent = `${icons[mode]} ${names[mode]} Mode`;
+            document.getElementById('toggleMode').textContent = `Mode: ${names[mode]}`;
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        animate();
+    </script>
+</body>
+</html>
