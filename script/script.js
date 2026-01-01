@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.setAttribute('aria-label', 'Toggle navigation');
     navToggle.innerHTML = '<span></span>';
     const nav = document.querySelector('nav');
-    if (nav) nav.insertBefore(navToggle, nav.querySelector('ul'));
+    if (nav) nav.appendChild(navToggle);
 
     const navList = document.querySelector('nav ul');
     navToggle.addEventListener('click', () => {
@@ -50,8 +50,33 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
             }
+            // Typewriter Effect Logic
+            if (entry.target.id === 'about' && !entry.target.classList.contains('typed-out')) {
+                const p = entry.target.querySelector('p');
+                if (p) {
+                    entry.target.classList.add('typed-out'); // Flag to prevent re-running
+                    const text = p.innerText; // Get text
+                    p.innerText = ''; // Clear text
+                    p.style.opacity = '1'; // Make sure container is visible
+
+                    let i = 0;
+                    function typeWriter() {
+                        if (i < text.length) {
+                            p.innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 20); // Adjust speed here (lower is faster)
+                        } else {
+                            // Animation complete, maybe remove cursor or keep blinking
+                            p.classList.add('typing-cursor');
+                        }
+                    }
+                    typeWriter();
+                }
+            }
         });
-    }, { threshold: 0.12 });
+    }, {
+        threshold: 0.1
+    });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 
     // Active nav link based on current page or hash
