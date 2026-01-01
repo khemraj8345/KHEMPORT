@@ -46,7 +46,7 @@ body.dark-mode {
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     line-height: 1.6;
     color: var(--text-color);
     background-image: var(--bg-image);
@@ -644,306 +644,40 @@ section h2::after {
 
 #about {
     position: relative;
-    background: #0a0e27;
-    background: radial-gradient(circle at 70% 50%, #1a1b3e 0%, #0a0e27 100%);
+
+    /* Soft light pinkish/lavender to match previous vibe but light */
     overflow: hidden;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 2rem;
+    /* Ensure no spillover */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+@keyframes flowBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: -200% 0%;
+    }
 }
 
-.about-content {
+#about .container {
+    /* Removed specific background to let section bg show */
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 4rem;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+    /* Content above background */
 }
 
 .about-left {
     flex: 1;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-}
-
-.greeting {
-    font-size: 3rem;
-    font-weight: 400;
-    margin: 0;
-    line-height: 1.2;
-    color: #fff;
-}
-
-.name-accent {
-    color: #a855f7;
-    font-weight: 900;
-    font-size: 3.5rem;
-}
-
-.sub-greeting {
-    font-size: 3rem;
-    font-weight: 400;
-    margin: 0;
-    line-height: 1.2;
-    color: #fff;
-}
-
-.typewriter-wrapper {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #a855f7;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    min-height: 4rem;
-}
-
-.typewriter-text {
-    display: inline-block;
-}
-
-.cursor {
-    display: inline-block;
-    width: 3px;
-    background-color: #a855f7;
-    animation: blink 1s step-end infinite;
-    margin-left: 5px;
-    height: 3rem;
-}
-
-@keyframes blink {
-
-    from,
-    to {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
-
-.about-buttons {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.btn {
-    padding: 0.9rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-}
-
-.btn-primary {
-    background: transparent;
-    border: 2px solid #a855f7;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background: #a855f7;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-    transform: translateY(-3px);
-}
-
-.btn-secondary {
-    background: #fff;
-    color: #0a0e27;
-    border: 2px solid #fff;
-}
-
-.btn-secondary:hover {
-    background: #e0e0e0;
-    border-color: #e0e0e0;
-    transform: translateY(-3px);
-}
-
-.about-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile-img {
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #a855f7;
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
-    transition: transform 0.3s ease;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.profile-img:hover {
-    transform: scale(1.05);
-}
-
-@media (max-width: 968px) {
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-left {
-        align-items: center;
-    }
-
-    .greeting,
-    .sub-greeting {
-        font-size: 2rem;
-    }
-
-    .name-accent {
-        font-size: 2.5rem;
-    }
-
-    .typewriter-wrapper {
-        font-size: 2rem;
-        justify-content: center;
-    }
-
-    .about-buttons {
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .greeting,
-    .sub-greeting {
-        font-size: 1.5rem;
-    }
-
-    .name-accent {
-        font-size: 2rem;
-    }
-
-    .typewriter-wrapper {
-        font-size: 1.5rem;
-    }
-
-    .profile-img {
-        width: 250px;
-        height: 250px;
-    }
-
-    .about-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .btn {
-        width: 100%;
-    }
-}
-
-.about-left .greeting {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
-    color: #fff;
-}
-
-.about-left .name-accent {
-    color: #a855f7;
-    /* Purple accent */
-}
-
-.about-left .sub-greeting {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
-    color: #fff;
-    left: 0;
-    transform: none;
-}
-
-.typewriter-wrapper {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #a855f7;
-    /* Purple for role */
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-}
-
-.cursor {
-    display: inline-block;
-    width: 3px;
-    background-color: #a855f7;
-    animation: blink 1s step-end infinite;
-    margin-left: 5px;
-}
-
-@keyframes blink {
-
-    from,
-    to {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
-
-.about-buttons {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
-}
-
-.btn-primary {
-    background: transparent;
-    border: 2px solid #a855f7;
-    color: #fff;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: #a855f7;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-    transform: translateY(-3px);
-}
-
-.btn-secondary {
-    background: #fff;
-    border: 2px solid #fff;
-    color: #0a0e27;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-secondary:hover {
-    background: #e0e0e0;
-    border-color: #e0e0e0;
-    transform: translateY(-3px);
+    align-items: flex-start;
 }
 
 .about-left h2 {
@@ -953,10 +687,7 @@ section h2::after {
 }
 
 .about-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex: 2;
 }
 
 #about p {
@@ -1008,14 +739,16 @@ section h2::after {
 }
 
 .profile-img {
-    width: 350px;
-    /* Larger image */
-    height: 350px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
+    margin: 2rem 0 0 0;
+    /* Margin top only */
+    display: block;
     object-fit: cover;
-    border: 4px solid #a855f7;
-    /* Match accent */
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    /* Generic border */
+    box-shadow: 0 20px 50px var(--shadow-color);
     transition: transform 0.3s ease;
 }
 
