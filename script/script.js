@@ -249,5 +249,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add particle effect logic if needed, but the main rocket/star logic is sufficient for the requested background effect.
+    // --- Typewriter Effect Class ---
+    /**
+     * Accessible Typewriter Effect
+     * Typing -> Deleting -> Next Phrase loop
+     */
+    class Typewriter {
+        constructor(el, phrases, period) {
+            this.el = el;
+            this.phrases = phrases;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.loopNum = 0;
+            this.isDeleting = false;
+            this.tick();
+        }
+
+        tick() {
+            const i = this.loopNum % this.phrases.length;
+            const fullTxt = this.phrases[i];
+
+            if (this.isDeleting) {
+                this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+                this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = this.txt;
+
+            let delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+                delta = this.period;
+                this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+                this.isDeleting = false;
+                this.loopNum++;
+                delta = 500;
+            }
+
+            setTimeout(() => {
+                this.tick();
+            }, delta);
+        }
+    }
+
+    // Initialize Typewriter
+    const typewriterElement = document.getElementById('typewriter-text');
+    if (typewriterElement) {
+        const phrases = ["Web Developer", "Python Developer", "Video Editor"];
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReducedMotion) {
+            typewriterElement.innerHTML = phrases[0]; // Static text
+        } else {
+            new Typewriter(typewriterElement, phrases, 2000);
+        }
+    }
 });
