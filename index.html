@@ -10,8 +10,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
-</head>
+    <!-- Inline styles moved to style/style.css for better maintainability --></head>
 
 <body>
     <header>
@@ -51,13 +52,22 @@
     </section>
 
     <section id="about">
-        <div class="container about-content">
-            <div class="about-left">
-                <h2>About Me</h2>
-                <img src="accesaries/yash.jpg" alt="Profile Picture" class="profile-img">
-            </div>
-            <div class="about-right">
-                <p>Welcome to my portfolio! I'm a beginner python and web dewloper I love coding.</p>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-left">
+                    <p class="greeting">Hi, My name is <span class="name-accent">Yash</span></p>
+                    <h2 class="sub-greeting">and I am a passionate</h2>
+                    <div class="typewriter-wrapper">
+                        <span id="typewriter-text" class="typewriter-text"></span><span class="cursor"></span>
+                    </div>
+                    <div class="about-buttons">
+                        <button class="btn btn-primary">Download Resume</button>
+                        <button class="btn btn-secondary">Visit Github</button>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <img src="assets/yash.jpg" alt="Profile Picture" class="profile-img">
+                </div>
             </div>
         </div>
     </section>
@@ -144,6 +154,64 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="script/script.js"></script>
+
+    <script>
+        // Typewriter Effect Class
+        class Typewriter {
+            constructor(el, phrases, period) {
+                this.el = el;
+                this.phrases = phrases;
+                this.period = parseInt(period, 10) || 2000;
+                this.txt = '';
+                this.loopNum = 0;
+                this.isDeleting = false;
+                this.tick();
+            }
+            
+            tick() {
+                const i = this.loopNum % this.phrases.length;
+                const fullTxt = this.phrases[i];
+                
+                if (this.isDeleting) {
+                    this.txt = fullTxt.substring(0, this.txt.length - 1);
+                } else {
+                    this.txt = fullTxt.substring(0, this.txt.length + 1);
+                }
+                
+                this.el.innerHTML = this.txt;
+                
+                let delta = 200 - Math.random() * 100;
+                if (this.isDeleting) { delta /= 2; }
+                
+                if (!this.isDeleting && this.txt === fullTxt) {
+                    delta = this.period;
+                    this.isDeleting = true;
+                } else if (this.isDeleting && this.txt === '') {
+                    this.isDeleting = false;
+                    this.loopNum++;
+                    delta = 500;
+                }
+                
+                setTimeout(() => {
+                    this.tick();
+                }, delta);
+            }
+        }
+        
+        // Initialize Typewriter
+        const typewriterElement = document.getElementById('typewriter-text');
+        if (typewriterElement) {
+            const phrases = ["Web Developer.", "Python Developer.", "Video Editor."];
+            
+            // Check for reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) {
+                typewriterElement.innerHTML = phrases[0];
+            } else {
+                new Typewriter(typewriterElement, phrases, 2000);
+            }
+        }
+    </script>
 </body>
 
 </html>

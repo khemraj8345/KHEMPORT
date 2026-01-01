@@ -8,7 +8,7 @@
 
 :root {
     /* Light Mode (Default) */
-    --bg-image: url('../accesaries/background_01.png');
+    --bg-image: url('../assets/background_01.png');
     --bg-color: #f0f0f0;
     --text-color: #222;
     --text-secondary: #555;
@@ -18,6 +18,8 @@
     --card-border: rgba(255, 255, 255, 0.6);
     --accent-color: #FF7A59;
     --accent-gradient: linear-gradient(135deg, #FFB86B 0%, #FF7A59 100%);
+    --highlight-color: #a855f7; /* used for name and typewriter */
+    --resume-hover-color: #FFD717; /* yellow for Download Resume hover */
     --shadow-color: rgba(0, 0, 0, 0.1);
     --hero-gradient: linear-gradient(135deg, #111 0%, #555 100%);
     --bg-gradient-visible: none;
@@ -643,122 +645,224 @@ section h2::after {
 /* About Section Refactor */
 
 #about {
-    position: relative;
-
-    /* Soft light pinkish/lavender to match previous vibe but light */
-    overflow: hidden;
-    /* Ensure no spillover */
-}
-
-@keyframes flowBackground {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    100% {
-        background-position: -200% 0%;
-    }
-}
-
-#about .container {
-    /* Removed specific background to let section bg show */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-    text-align: left;
-    position: relative;
-    z-index: 2;
-    /* Content above background */
-}
-
-.about-left {
-    flex: 1;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.about-left h2 {
-    margin-left: 0;
-    transform: translateX(0);
-    left: 0;
-}
-
-.about-right {
-    flex: 2;
-}
-
-#about p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin: 0;
-    opacity: 0;
-    /* Animation applied when visible */
-}
-
-#about.is-visible p {
-    /* Typewriter effect handled by JS */
-    opacity: 1;
-    border-right: 3px solid var(--accent-color);
-    /* Cursor */
-    white-space: pre-wrap;
-    /* Preserve formatting */
-    display: inline-block;
-}
-
-/* Blinking cursor animation class */
-.typing-cursor {
-    animation: blinkCursor 0.75s step-end infinite;
-}
-
-@keyframes blinkCursor {
-
-    from,
-    to {
-        border-color: transparent
-    }
-
-    50% {
-        border-color: var(--accent-color)
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.profile-img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin: 2rem 0 0 0;
-    /* Margin top only */
-    display: block;
-    object-fit: cover;
-    border: 5px solid rgba(255, 255, 255, 0.2);
-    /* Generic border */
-    box-shadow: 0 20px 50px var(--shadow-color);
-    transition: transform 0.3s ease;
-}
-
-body.dark-mode .profile-img {
-    border-color: var(--accent-color);
-}
-
-.profile-img:hover {
-    transform: scale(1.05) rotate(2deg);
-}
+            position: relative;
+            
+            overflow: hidden;
+            color: #000;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            font-family: 'Poppins', sans-serif; /* preserve original Poppins look */
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+        
+        .about-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+        
+        .greeting {
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.2;
+            color: #000;
+        }
+        
+        .name-accent {
+            color: var(--highlight-color);
+            font-weight: 900;
+            font-size: 3.5rem;
+        }
+        
+        .sub-greeting {
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.2;
+            color: #000;
+        }
+        
+        .typewriter-wrapper {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--highlight-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            min-height: 4rem;
+        }
+        
+        .typewriter-text {
+            display: inline-block;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: currentColor; /* use the same color as the typewriter text */
+            animation: blink 1s step-end infinite;
+            margin-left: 5px;
+            height: 1em;
+            vertical-align: middle;
+            border-radius: 1px;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .about-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            background: transparent;
+            border: 2px solid var(--highlight-color);
+            color: var(--highlight-color);
+            transition: background-color 0.18s ease, color 0.18s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        /* Yellow fill only on mouse hover */
+        .btn-primary:hover {
+            background: var(--resume-hover-color);
+            color: #000;
+            border-color: var(--resume-hover-color);
+            box-shadow: 0 0 20px rgba(255, 215, 23, 0.35);
+            transform: translateY(-3px);
+        }
+        /* Ensure About section Resume button shows yellow only on hover (higher specificity) */
+        #about .btn-primary:hover {
+            background: var(--resume-hover-color);
+            color: #000;
+            border-color: var(--resume-hover-color);
+            box-shadow: 0 0 20px rgba(255, 215, 23, 0.35);
+            transform: translateY(-3px);
+        }
+        .btn-primary:focus-visible {
+            box-shadow: 0 0 0 4px rgba(255, 215, 23, 0.25);
+        }
+        
+        .btn-secondary {
+            background: var(--highlight-color);
+            color: #fff;
+            border: 2px solid var(--highlight-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #8b3fd9;
+            border-color: #8b3fd9;
+            transform: translateY(-3px);
+        }
+        
+        .about-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--highlight-color);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 968px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-left {
+                align-items: center;
+            }
+            
+            .greeting, .sub-greeting {
+                font-size: 2rem;
+            }
+            
+            .name-accent {
+                font-size: 2.5rem;
+            }
+            
+            .typewriter-wrapper {
+                font-size: 2rem;
+                justify-content: center;
+            }
+            
+            .about-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .greeting, .sub-greeting {
+                font-size: 1.5rem;
+            }
+            
+            .name-accent {
+                font-size: 2rem;
+            }
+            
+            .typewriter-wrapper {
+                font-size: 1.5rem;
+            }
+            
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .about-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
 
 /* Skills Section */
 #skills {
@@ -1126,6 +1230,15 @@ body:not(.dark-mode) .skill:hover {
     align-items: center;
     justify-content: center;
 }
+/* Ensure container and form inside #contact are centered */
+#contact .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#contact form {
+    margin: 0 auto; /* center the form if container has extra width */
+}
 
 #contact h2 {
     color: var(--text-color);
@@ -1134,6 +1247,22 @@ body:not(.dark-mode) .skill:hover {
 body.dark-mode #contact h2 {
     color: #fff;
     text-shadow: 0 0 10px var(--accent-color);
+}
+
+/* About section: ensure text is readable in dark mode */
+body.dark-mode #about {
+    color: #fff;
+}
+/* Keep the name and typewriter highlighted in dark mode (do not force to white) */
+body.dark-mode #about .name-accent,
+body.dark-mode #about .typewriter-wrapper {
+    color: var(--highlight-color);
+}
+/* Other about text stays white for readability */
+body.dark-mode #about .greeting,
+body.dark-mode #about .sub-greeting,
+body.dark-mode #about .about-buttons {
+    color: #fff;
 }
 
 form {
