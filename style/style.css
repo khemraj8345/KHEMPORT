@@ -764,9 +764,7 @@ section h2::after {
     color: var(--highlight-color);
     transition: background-color 0.18s ease, color 0.18s ease, transform 0.2s ease, box-shadow 0.2s ease;
     -webkit-tap-highlight-color: transparent;
-    /* Remove default mobile tap highlight */
     touch-action: manipulation;
-    /* Improve touch responsiveness */
 }
 
 /* Yellow fill only on mouse hover (desktop only) */
@@ -778,25 +776,32 @@ section h2::after {
         box-shadow: 0 0 20px rgba(255, 215, 23, 0.35);
         transform: translateY(-3px);
     }
+
+    .btn-primary:active {
+        background: var(--resume-hover-color);
+        color: #000;
+        border-color: var(--resume-hover-color);
+        box-shadow: 0 0 20px rgba(255, 215, 23, 0.5);
+        transform: translateY(-1px);
+    }
 }
 
-/* Yellow fill when button is pressed/active (works on both desktop and mobile) */
-.btn-primary:active {
-    background: var(--resume-hover-color) !important;
-    color: #000 !important;
-    border-color: var(--resume-hover-color) !important;
-    box-shadow: 0 0 20px rgba(255, 215, 23, 0.5) !important;
-    transform: translateY(-1px) !important;
-}
-
-/* Disable hover on touch devices */
-@media (hover: none) {
+/* Touch devices only - no hover, only active state */
+@media (hover: none) and (pointer: coarse) {
     .btn-primary:hover {
-        background: transparent;
-        color: var(--highlight-color);
-        border-color: var(--highlight-color);
-        transform: none;
-        box-shadow: none;
+        background: transparent !important;
+        color: var(--highlight-color) !important;
+        border-color: var(--highlight-color) !important;
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .btn-primary:active {
+        background: var(--resume-hover-color);
+        color: #000;
+        border-color: var(--resume-hover-color);
+        box-shadow: 0 0 20px rgba(255, 215, 23, 0.5);
+        transform: translateY(-1px);
     }
 }
 

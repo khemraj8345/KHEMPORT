@@ -12,7 +12,8 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
-    <!-- Inline styles moved to style/style.css for better maintainability --></head>
+    <!-- Inline styles moved to style/style.css for better maintainability -->
+</head>
 
 <body>
     <header>
@@ -167,22 +168,22 @@
                 this.isDeleting = false;
                 this.tick();
             }
-            
+
             tick() {
                 const i = this.loopNum % this.phrases.length;
                 const fullTxt = this.phrases[i];
-                
+
                 if (this.isDeleting) {
                     this.txt = fullTxt.substring(0, this.txt.length - 1);
                 } else {
                     this.txt = fullTxt.substring(0, this.txt.length + 1);
                 }
-                
+
                 this.el.innerHTML = this.txt;
-                
+
                 let delta = 200 - Math.random() * 100;
                 if (this.isDeleting) { delta /= 2; }
-                
+
                 if (!this.isDeleting && this.txt === fullTxt) {
                     delta = this.period;
                     this.isDeleting = true;
@@ -191,18 +192,18 @@
                     this.loopNum++;
                     delta = 500;
                 }
-                
+
                 setTimeout(() => {
                     this.tick();
                 }, delta);
             }
         }
-        
+
         // Initialize Typewriter
         const typewriterElement = document.getElementById('typewriter-text');
         if (typewriterElement) {
             const phrases = ["Web Developer.", "Python Developer.", "Video Editor."];
-            
+
             // Check for reduced motion preference
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (prefersReducedMotion) {
@@ -211,6 +212,24 @@
                 new Typewriter(typewriterElement, phrases, 2000);
             }
         }
+
+        // Fix sticky hover on mobile for Download Resume button
+        document.addEventListener('DOMContentLoaded', function () {
+            const resumeButton = document.querySelector('.btn-primary');
+            if (resumeButton) {
+                // Remove hover state after touch on mobile
+                resumeButton.addEventListener('touchend', function () {
+                    this.blur(); // Remove focus to prevent sticky hover
+                }, { passive: true });
+
+                // Also handle click event
+                resumeButton.addEventListener('click', function () {
+                    setTimeout(() => {
+                        this.blur(); // Remove focus after a brief moment
+                    }, 100);
+                });
+            }
+        });
     </script>
 </body>
 
