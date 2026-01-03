@@ -644,6 +644,11 @@ section h2::after {
     border-radius: 2px;
 }
 
+/* Remove underline from sub-greeting text only */
+.sub-greeting::after {
+    display: none;
+}
+
 /* About Section Refactor */
 
 #about {
