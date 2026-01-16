@@ -901,6 +901,21 @@ section h2::after {
     .about-buttons {
         justify-content: center;
     }
+
+    /* Skills Section Tablet Optimizations */
+    #skills {
+        padding: 5rem 0;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 0 2rem;
+    }
+
+    .skill {
+        padding: 1.75rem 1.25rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -942,6 +957,49 @@ section h2::after {
     .btn {
         width: 100%;
     }
+
+    /* Skills Section Mobile Optimizations */
+    #skills {
+        padding: 4rem 0;
+    }
+
+    /* Smaller decorative circles for mobile */
+    #skills::before {
+        width: 250px;
+        height: 250px;
+        top: -5%;
+        right: -10%;
+    }
+
+    #skills::after {
+        width: 300px;
+        height: 300px;
+        bottom: -10%;
+        left: -10%;
+    }
+
+    body.dark-mode #skills::before {
+        width: 200px;
+        height: 200px;
+    }
+
+    body.dark-mode #skills::after {
+        width: 250px;
+        height: 250px;
+    }
+
+    /* Skills Grid Mobile */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* Skill Cards Mobile */
+    .skill {
+        padding: 1.5rem 1rem;
+        font-size: 1rem;
+    }
 }
 
 /* Skills Section - Light Mode */
@@ -981,7 +1039,7 @@ section h2::after {
 
 /* Skills Section - Dark Mode */
 body.dark-mode #skills {
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background: #1a1a1a;
     color: #fff;
 }
 
