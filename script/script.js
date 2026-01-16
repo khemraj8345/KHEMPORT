@@ -207,47 +207,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Skills Section Space Logic ---
-    const spaceStars = document.getElementById('space-stars');
-    if (spaceStars) {
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'space-star';
-            star.style.width = Math.random() * 3 + 'px';
-            star.style.height = star.style.width;
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            spaceStars.appendChild(star);
-        }
-    }
-
-    // Rocket Launch
-    const rocket = document.getElementById('rocket');
-    let isLaunching = false;
-
-    if (rocket) {
-        rocket.addEventListener('click', () => {
-            if (isLaunching) return;
-            isLaunching = true;
-
-            rocket.style.transition = 'all 2s ease-in';
-            // Launch up and rotate
-            rocket.style.transform = 'translate(-50%, -150vh) rotate(-10deg)';
-
-            setTimeout(() => {
-                // Reset position smoothly while hidden (or snap back if preferred, user code snapped)
-                rocket.style.transition = 'none';
-                rocket.style.transform = 'translate(-50%, 150vh)'; /* Move to bottom */
-
-                setTimeout(() => {
-                    rocket.style.transition = 'all 2s ease-out';
-                    rocket.style.transform = 'translate(-50%, -50%)'; /* Return to center */
-                    isLaunching = false;
-                }, 50);
-            }, 2000);
-        });
-    }
-
-    // Add particle effect logic if needed, but the main rocket/star logic is sufficient for the requested background effect.
+    // Form submission and other interactions remain functional
 });
