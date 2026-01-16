@@ -214,11 +214,7 @@ nav ul li a:hover::after {
     /* Add spacing on desktop */
 }
 
-#theme-toggle:hover {
-    transform: rotate(15deg) scale(1.1);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
+
 
 /* Hero Section */
 .hero {
@@ -682,7 +678,7 @@ section h2::after {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0;
     align-items: flex-start;
     text-align: left;
 }
@@ -691,7 +687,7 @@ section h2::after {
     font-size: 3rem;
     font-weight: 400;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
     color: #000;
 }
 
@@ -705,7 +701,7 @@ section h2::after {
     font-size: 3rem;
     font-weight: 400;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
     color: #000;
 }
 
@@ -717,6 +713,7 @@ section h2::after {
     display: flex;
     align-items: center;
     min-height: 4rem;
+    line-height: 1.1;
 }
 
 .typewriter-text {
@@ -876,9 +873,16 @@ section h2::after {
 
 @media (max-width: 480px) {
 
+    .about-left {
+        align-items: flex-start;
+        text-align: left;
+    }
+
     .greeting,
     .sub-greeting {
         font-size: 1.5rem;
+        text-align: left;
+        width: 100%;
     }
 
     .name-accent {
@@ -887,6 +891,9 @@ section h2::after {
 
     .typewriter-wrapper {
         font-size: 1.5rem;
+        justify-content: flex-start;
+        text-align: left;
+        width: 100%;
     }
 
     .profile-img {
@@ -897,6 +904,7 @@ section h2::after {
     .about-buttons {
         flex-direction: column;
         width: 100%;
+        align-items: flex-start;
     }
 
     .btn {
@@ -1332,14 +1340,31 @@ textarea {
     border: 1px solid var(--card-border);
     border-radius: 12px;
     font-size: 1rem;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     color: var(--text-color);
     transition: all 0.3s ease;
+}
+
+/* Placeholder styling for consistent appearance */
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 body.dark-mode input,
 body.dark-mode textarea {
     background: rgba(0, 0, 0, 0.3);
     color: #fff;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
 }
 
 /* Dark Mode Toggle Button */
