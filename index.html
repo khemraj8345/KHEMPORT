@@ -1,18 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khemraj modi</title>
-    <style>
-        .harsh{
-            background-color: rgb(89, 10, 216);
-        }
-
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Khemraj Modi is a full stack developer building thoughtful digital experiences, from healthcare platforms to playful brand websites.">
+  <title>Khemraj Modi — Full Stack Developer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root{--paper:#f5f4ef;--ink:#20221f;--muted:#777a73;--line:#dcdcd4;--green:#b9f264;--blue:#d9e9ff;--orange:#ff6848;--serif:Georgia,'Times New Roman',serif;--sans:'Manrope',Arial,sans-serif;--mono:'DM Mono',monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1120px,calc(100% - 64px));margin:auto}.nav{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font-size:17px;font-weight:800;letter-spacing:-.06em}.brand span{color:#8e9188}.nav-links{display:flex;gap:34px;align-items:center;font-size:12px;color:#5f625c}.nav-links a:hover,.text-link:hover{color:#698e35}.nav-cta{display:inline-flex;align-items:center;gap:10px;border:1px solid #c9cac1;border-radius:30px;padding:11px 16px;color:var(--ink)!important}.nav-cta:after{content:'↗';font-size:15px}.menu-toggle{display:none;border:0;background:none;font-size:24px}.hero{padding:108px 0 96px}.eyebrow,.label{font:11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}.eyebrow{display:flex;align-items:center;gap:10px}.dot{width:8px;height:8px;border-radius:50%;background:#83ba42;box-shadow:0 0 0 4px #e2eed4}.hero h1{font-size:clamp(55px,8vw,104px);line-height:.98;letter-spacing:-.085em;font-weight:600;margin:30px 0 26px;max-width:930px}.hero h1 em{font-family:var(--serif);font-weight:400;letter-spacing:-.08em}.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:32px}.hero-copy{font-size:16px;line-height:1.8;color:#656861;max-width:475px}.hero-copy strong{font-weight:700;color:var(--ink)}.pill{display:inline-flex;align-items:center;gap:10px;background:var(--green);border-radius:40px;padding:15px 21px;font-size:12px;font-weight:700;white-space:nowrap;transition:transform .2s}.pill:hover{transform:translateY(-3px)}.pill span{font-size:17px}.meta-row{display:flex;justify-content:space-between;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font:10px var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.section{padding:94px 0}.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px}.section-head h2{font-size:clamp(32px,5vw,51px);letter-spacing:-.07em;font-weight:600;margin:14px 0 0}.section-head p{font-size:12px;color:var(--muted);margin:0}.projects{display:grid;grid-template-columns:1fr 1fr;gap:20px}.project{min-width:0}.project-art{aspect-ratio:1.23;border-radius:5px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}.hospital-art{background:#e3eafa}.art-index{position:absolute;top:20px;left:21px;font:10px var(--mono);color:#666b75}.hospital-window{position:absolute;inset:0;display:grid;place-items:center}.hospital-card{width:64%;height:71%;background:#f9fbff;border:1px solid #d5deed;border-radius:8px;box-shadow:0 20px 40px #8299be2b;display:flex;overflow:hidden;transform:rotate(-3deg)}.hospital-side{width:24%;background:#f0f3f8;border-right:1px solid #e4e7ed;padding:17px 10px}.mini-logo{width:23px;height:23px;background:#426df2;border-radius:7px;margin-bottom:23px;position:relative}.mini-logo:before,.mini-logo:after{content:'';position:absolute;background:white;border-radius:2px;left:10px;top:4px;width:3px;height:15px}.mini-logo:after{transform:rotate(90deg)}.side-line{height:5px;background:#d7dce6;border-radius:8px;margin:10px 0}.side-line.active{background:#8ca7ff;width:85%}.hospital-main{flex:1;padding:17px}.h-title{font-size:clamp(8px,1.2vw,13px);font-weight:700;margin:4px 0 13px}.h-sub{font-size:6px;color:#9199a7}.doctor-row{display:flex;align-items:center;gap:7px;background:#f4f7fb;padding:8px;border-radius:5px;margin:7px 0}.doctor-avatar{width:25px;height:25px;border-radius:50%;background:linear-gradient(145deg,#b9d5fa,#7ca0d5)}.doctor-lines{flex:1}.doctor-lines i{display:block;height:4px;border-radius:4px;background:#d9deea;width:75%;margin:4px 0}.doctor-lines i+ i{width:48%;background:#e8ebf1}.book-tag{font-size:5px;background:#dfe8ff;color:#4168d7;padding:5px;border-radius:3px}.amul-art{background:#ffc84d}.amul-art:before{content:'';position:absolute;width:65%;height:65%;background:#ffdf89;border-radius:50%;filter:blur(1px)}.sunray{position:absolute;width:210px;height:210px;border-radius:50%;border:1px solid #ef9c3480;box-shadow:0 0 0 20px #ef9c3420,0 0 0 40px #ef9c3418}.milk-card{position:relative;background:#f9f7ed;width:46%;height:65%;border-radius:8px 8px 20px 20px;box-shadow:0 18px 25px #b8783130;transform:rotate(7deg);display:flex;align-items:center;justify-content:center;flex-direction:column;border-top:12px solid #f6f2e4}.milk-cap{position:absolute;top:-24px;width:27%;height:15px;background:#f2eee2;border-radius:4px 4px 0 0}.amul-logo{font-size:clamp(22px,4vw,46px);font-weight:800;color:#184592;letter-spacing:-.08em;font-style:italic}.cool-word{font-family:var(--serif);font-size:clamp(19px,3.1vw,36px);font-style:italic;color:#ee4c2b;margin-top:-3px}.splash{font:8px var(--mono);color:#b77a24;margin-top:14px}.float-leaf{position:absolute;right:15%;bottom:15%;width:30px;height:15px;background:#7d9d34;border-radius:100% 0 100% 0;transform:rotate(-28deg)}.project-info{display:flex;justify-content:space-between;gap:14px;padding:19px 1px 0}.project-info h3{font-size:18px;letter-spacing:-.04em;margin:0 0 7px;font-weight:700}.project-info p{font-size:12px;color:var(--muted);line-height:1.6;margin:0;max-width:380px}.project-type{font:9px var(--mono);color:#777a73;white-space:nowrap;padding-top:5px}.project-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.tag{border:1px solid var(--line);border-radius:20px;padding:5px 9px;font:9px var(--mono);color:#696c66}.about{background:#e9eae3}.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}.about-copy h2{font-size:clamp(33px,5vw,55px);letter-spacing:-.075em;line-height:1.05;font-weight:600;margin:14px 0 0}.about-text{font-size:14px;line-height:1.9;color:#656861;max-width:550px}.about-text p{margin:0 0 18px}.skills{display:grid;grid-template-columns:1fr 1fr;gap:0 35px;margin-top:29px;border-top:1px solid #d2d4cc}.skill{padding:14px 0;border-bottom:1px solid #d2d4cc;display:flex;justify-content:space-between;font-size:12px}.skill span:last-child{font:9px var(--mono);color:#82857e}.contact{padding:90px 0}.contact-box{background:var(--ink);color:var(--paper);border-radius:7px;padding:55px 60px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px}.contact .label{color:#b3b6ad}.contact h2{font-size:clamp(40px,7vw,74px);letter-spacing:-.08em;line-height:.98;font-weight:600;margin:20px 0 0}.contact h2 em{font-family:var(--serif);font-weight:400}.contact .pill{flex-shrink:0}.footer{padding:22px 0 28px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font:10px var(--mono)}.footer a:hover{color:var(--ink)}
+    @media(max-width:700px){.wrap{width:min(100% - 36px,540px)}.nav{height:68px}.nav-links{display:none;position:absolute;z-index:5;top:68px;left:0;right:0;background:var(--paper);padding:20px 22px 25px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:20px}.nav-links.open{display:flex}.nav-cta{margin-left:auto;margin-right:12px;padding:9px 13px;font-size:11px}.menu-toggle{display:block}.hero{padding:78px 0 63px}.hero h1{font-size:clamp(52px,13vw,78px);margin:25px 0 21px}.hero-bottom{align-items:flex-start;flex-direction:column;gap:21px}.hero-copy{font-size:14px}.meta-row{font-size:8px}.section{padding:68px 0}.section-head{align-items:flex-start;flex-direction:column;gap:12px}.projects{grid-template-columns:1fr;gap:29px}.project-art{aspect-ratio:1.18}.hospital-card{width:68%;height:70%}.about-grid{grid-template-columns:1fr;gap:22px}.about-copy h2{max-width:350px}.skills{gap:0 18px}.contact{padding:65px 0}.contact-box{padding:35px 26px;align-items:flex-start;flex-direction:column}.contact h2{font-size:clamp(45px,12vw,65px)}.footer{font-size:8px}.project-type{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+    :root{--paper:#080722;--ink:#f7f5ff;--muted:#a8a4c5;--line:#302c59;--green:#a878ec;--blue:#17143b;--orange:#ff6848}
+    body{background:var(--paper);color:var(--ink)}
+    .nav{width:100%;height:74px;padding:0 max(32px,calc((100% - 1120px)/2));border-color:#201d48;background:#111034}
+    .brand{font-size:23px;letter-spacing:-.05em}.brand span{color:#a878ec}
+    .nav-links{font-size:15px;font-weight:600;color:#f2efff;gap:42px}.nav-cta{display:none}.menu-toggle{color:#fff}
+    .hero{width:100%;min-height:calc(100vh - 74px);padding:0 max(8%,calc((100% - 1150px)/2));display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:clamp(38px,7vw,100px);position:relative;overflow:hidden}
+    .hero:after{content:'';position:absolute;bottom:0;left:0;right:0;border-bottom:2px solid #a9a0e5}
+    .hero-content{position:relative;z-index:1}.hero .eyebrow{color:#bcb8d7}.hero h1{font-size:clamp(38px,4vw,58px);line-height:1.28;letter-spacing:-.06em;font-weight:600;margin:27px 0 45px;max-width:660px}.hero h1 em,.hero .role{color:#a878ec;font-style:normal}.hero h1 .intro-line{font-size:1.06em;letter-spacing:-.035em}.hero-copy{display:none}.hero-bottom{display:block}.hero-actions{display:flex;gap:13px}.outline-btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid #ebe8ff;border-radius:5px;padding:12px 16px;font-size:15px;color:#f8f6ff;transition:background .2s,color .2s,transform .2s}.outline-btn:hover{background:#a878ec;border-color:#a878ec;color:#100d30;transform:translateY(-2px)}.hero-visual{position:relative;width:min(100%,370px);justify-self:end;filter:drop-shadow(0 20px 36px #8f6be533)}.hero-visual:before{content:'';position:absolute;inset:-12px 18px 18px -12px;border:1px solid #a878ec66;border-radius:10px 10px 105px 10px;z-index:-1}.hero-visual img{display:block;width:100%;aspect-ratio: .84;object-fit:cover;object-position:center 43%;border-radius:9px 9px 95px 9px;border:1px solid #7770be;box-shadow:0 24px 60px #02011680}.hero .pill{display:none}.meta-row{color:#b4b0ce;border-color:#302c59}.section-head p,.project-info p,.about-text,.project-type{color:#bbb7d0}.project-art{border:1px solid #302c59}.hospital-art{background:#111d42}.amul-art{background:#492e5d}.hospital-card{box-shadow:0 20px 40px #05051766}.amul-art:before{background:#ffdf8940}.sunray{border-color:#ffc75080;box-shadow:0 0 0 20px #ef9c3420,0 0 0 40px #ef9c3418}.tag{border-color:#454066;color:#d1cde4}.about{background:#111034}.about .label,.contact .label{color:#c0bcda}.skill{border-color:#302c59}.contact-box{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(120deg,#241b4a 0%,#352354 54%,#202849 100%);border:1px solid #5c4a83;box-shadow:0 22px 65px #05041766}.contact-box:before{content:'';position:absolute;z-index:-1;width:380px;height:260px;right:-100px;top:-130px;background:radial-gradient(ellipse,#a878ec55 0%,transparent 70%);pointer-events:none}.contact-box .pill{background:#d5c5ff;color:#19132e}.contact-box .pill:hover{background:#e4d9ff}.footer{border-color:#302c59;color:#a8a4c5}
+    @media(max-width:700px){.nav{padding:0 18px}.nav-links{background:#111034}.hero{width:100%;min-height:auto;padding:72px 26px 70px;grid-template-columns:1fr;gap:35px}.hero h1{font-size:clamp(39px,10vw,56px);margin:23px 0 34px}.hero-visual{width:min(74%,310px);justify-self:center}.hero:after{left:18px;right:18px}.hero-actions{flex-wrap:wrap}.section-head p,.project-info p,.about-text{color:#bbb7d0}}
+  </style>
 </head>
 <body>
-<h1 id = harsh> hello harsh chodu randi ke </h1>
-<div> <a href="youtube.com"> you tube</a></div>
+  <header class="wrap nav">
+    <a class="brand" href="#top" aria-label="Khemu's Portfolio home">Khemu's Portfolio<span>.</span></a>
+    <nav class="nav-links" id="nav-links" aria-label="Main navigation">
+      <a href="#top">Home</a><a href="#about">About</a><a href="#services">Services</a><a href="#work">Projects</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Let’s talk</a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">☰</button>
+  </header>
+  <main id="top">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <div class="eyebrow"><span class="dot"></span> Full stack developer · Open to opportunities</div>
+        <h1>Hi, my name is <em>Khemraj</em><br><span class="intro-line">I’m a passionate</span><br><span class="role" id="role-text">Web Developer</span><span aria-hidden="true" class="typing-caret">|</span></h1>
+        <div class="hero-bottom"><div class="hero-actions"><a class="outline-btn" href="#work">Explore my work</a><a class="outline-btn" href="https://github.com/khemraj8345" target="_blank" rel="noreferrer">Visit GitHub ↗</a></div></div>
+      </div>
+      <div class="hero-visual"><img src="assets/khemraj-portrait-optimized.jpg" alt="Portrait of Khemraj Modi smiling outdoors"></div>
+    </section>
+    <div class="wrap meta-row"><span>Selected work</span><span>2024 — 2026</span><span>India · Open to remote</span></div>
+    <section class="wrap section" id="work">
+      <div class="section-head"><div><div class="label">A few things I’ve made</div><h2>Featured projects</h2></div><p>Product thinking, code, and a little bit of play.</p></div>
+      <div class="projects">
+        <article class="project">
+          <div class="project-art hospital-art" role="img" aria-label="Illustration of a hospital appointment dashboard"><span class="art-index">01 / HEALTHCARE PLATFORM</span><div class="hospital-window"><div class="hospital-card"><div class="hospital-side"><div class="mini-logo"></div><div class="side-line active"></div><div class="side-line"></div><div class="side-line"></div><div class="side-line"></div></div><div class="hospital-main"><div class="h-sub">PATIENT PORTAL</div><div class="h-title">Find the right care for you</div><div class="doctor-row"><div class="doctor-avatar"></div><div class="doctor-lines"><i></i><i></i></div><span class="book-tag">BOOK</span></div><div class="doctor-row"><div class="doctor-avatar" style="background:linear-gradient(145deg,#f5d2c5,#d5897c)"></div><div class="doctor-lines"><i></i><i></i></div><span class="book-tag">BOOK</span></div><div class="doctor-row"><div class="doctor-avatar" style="background:linear-gradient(145deg,#e1d2f5,#9a83be)"></div><div class="doctor-lines"><i></i><i></i></div><span class="book-tag">BOOK</span></div></div></div></div></div>
+          <div class="project-info"><div><h3>Hospital Management Platform</h3><p>A complete hospital website that helps patients explore facilities and treatments, and gives doctors and admins tools to manage appointments.</p><div class="project-tags"><span class="tag">Patient experience</span><span class="tag">Appointment booking</span><span class="tag">Admin dashboard</span></div></div><span class="project-type">FULL STACK</span></div>
+        </article>
+        <article class="project">
+          <div class="project-art amul-art" role="img" aria-label="Bright illustrated Amul Cool milk bottle concept"><span class="art-index">02 / BRAND EXPERIENCE</span><div class="sunray"></div><div class="milk-card"><div class="milk-cap"></div><div class="amul-logo">amul</div><div class="cool-word">cool</div><div class="splash">A LITTLE JOY, SERVED CHILLED</div></div><div class="float-leaf"></div></div>
+          <div class="project-info"><div><h3>Amul Cool — Animated Website</h3><p>A lively, animation-led web experience inspired by Amul Cool, bringing a familiar drink brand to life on screen.</p><div class="project-tags"><span class="tag">Web animation</span><span class="tag">Brand storytelling</span><span class="tag">Responsive design</span></div></div><span class="project-type">WEB DESIGN</span></div>
+        </article>
+      </div>
+    </section>
+    <section class="about" id="about"><div class="wrap section about-grid"><div class="about-copy"><div class="label">A little about me</div><h2>Curious by nature.<br>Builder by choice.</h2></div><div class="about-text"><p>I’m a full stack developer who enjoys turning ideas into websites that are easy to use and satisfying to explore. I like working across the whole process: understanding a problem, shaping the experience, and building the pieces that make it work.</p><p>My projects range from practical tools that help people book and manage care to animated websites that make brands feel more alive. I’m always looking for the next interesting problem to solve.</p><div class="skills" id="services"><div class="skill"><span>Frontend development</span><span>01</span></div><div class="skill"><span>Backend development</span><span>02</span></div><div class="skill"><span>Product thinking</span><span>03</span></div><div class="skill"><span>Motion & interaction</span><span>04</span></div></div></div></div></section>
+    <section class="wrap contact" id="contact"><div class="contact-box"><div><div class="label">Have a project in mind?</div><h2>Let’s make<br>something <em>useful.</em></h2></div><a class="pill" href="mailto:">Get in touch <span>↗</span></a></div></section>
+  </main>
+  <footer class="wrap footer"><span>© 2026 Khemraj Modi</span><a href="#top">Back to top ↑</a><span>Made with care.</span></footer>
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('#nav-links');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.textContent = isOpen ? '×' : '☰';
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = '☰';
+    }));
+    const roleText = document.querySelector('#role-text');
+    const roles = ['Web Developer', 'Python Developer', 'Video Editor'];
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let roleIndex = 0;
+      let characterIndex = roles[0].length;
+      let deleting = true;
+      const typeNextRole = () => {
+        const currentRole = roles[roleIndex];
+        roleText.textContent = currentRole.slice(0, characterIndex);
+        if (deleting) {
+          characterIndex--;
+          if (characterIndex < 0) {
+            roleIndex = (roleIndex + 1) % roles.length;
+            characterIndex = 0;
+            deleting = false;
+          }
+        } else {
+          characterIndex++;
+          if (characterIndex > roles[roleIndex].length) {
+            deleting = true;
+            window.setTimeout(typeNextRole, 1300);
+            return;
+          }
+        }
+        window.setTimeout(typeNextRole, deleting ? 55 : 95);
+      };
+      window.setTimeout(typeNextRole, 1600);
+    }
+  </script>
 </body>
 </html>
