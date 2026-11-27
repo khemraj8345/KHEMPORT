@@ -7,6 +7,7 @@
   <meta name="description" content="Khemraj Sahu builds AI agents and n8n workflow automations, alongside full-stack web development projects.">
   <title>Khemraj Sahu</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
     :root{--paper:#f5f4ef;--ink:#20221f;--muted:#777a73;--line:#dcdcd4;--green:#b9f264;--blue:#d9e9ff;--orange:#ff6848;--serif:Georgia,'Times New Roman',serif;--sans:'Manrope',Arial,sans-serif;--mono:'DM Mono',monospace}
@@ -42,6 +43,7 @@
   .skill-card-top span{font:10px var(--mono);color:#a878ec}
   .skill-card p{margin:0;font-size:13px;line-height:1.7;color:#bbb7d0}
   @media(max-width:700px){.project-featured{grid-column:auto;display:block}.project-featured .project-info{padding:19px 1px 0;flex-direction:row}.project-featured .project-info h3{font-size:18px}.project-featured .project-info p{font-size:12px}.skills-two{grid-template-columns:1fr}}
+  :root{--chat--color--primary:#a878ec;--chat--color-primary:#a878ec;--chat--color--primary-shade-50:#9260dc;--chat--color-primary-shade-50:#9260dc;--chat--color--primary-shade-100:#7c4bc8;--chat--color--secondary:#698e35;--chat--color-secondary:#698e35;--chat--color--dark:#080722;--chat--color-dark:#080722;--chat--color--light:#f7f5ff;--chat--color-light:#f7f5ff;--chat--font-family:var(--sans);--chat--border-radius:12px;--chat--header--background:#111034;--chat--header--color:#f7f5ff;--chat--toggle--background:#a878ec;--chat--toggle--hover--background:#9260dc;--chat--toggle--active--background:#7c4bc8;--chat--toggle--color:#080722;--chat--toggle--size:58px;--chat--window--width:380px;--chat--window--height:560px}
   </style>
 </head>
 <body>
@@ -129,6 +131,23 @@
       };
       window.setTimeout(typeNextRole, 1600);
     }
+  </script>
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://khemludev.app.n8n.cloud/webhook/7f1f19cf-a967-411b-931e-db6e40cb92cd/chat',
+      initialMessages: [
+        'Hi there! 👋',
+        'I’m Khemraj’s AI agent. Ask me about AI automation, n8n workflows, or web development.'
+      ],
+      i18n: {
+        en: {
+          title: 'Chat with Khemraj’s AI',
+          subtitle: 'Powered by n8n AI Agent',
+          inputPlaceholder: 'Type your message...'
+        }
+      }
+    });
   </script>
 </body>
 </html>

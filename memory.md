@@ -31,7 +31,7 @@ KHEMPORT-main/
 - **Architecture:** Zero-build, single-file static site (`index.html`, 134 lines) with no framework, bundler, or external JS libraries.
 - **Styling:** Inline `<style>` using CSS custom properties, CSS Grid, Flexbox, image thumbnail for the AI Customer Bot project, and pure-CSS illustrations for the web projects.
 - **Typography:** Google Fonts (`Manrope` 400/500/600/700/800 and `DM Mono` 400/500) loaded via `@import`, plus system serif (`Georgia, 'Times New Roman', serif`) for italic emphasis.
-- **Scripting:** Inline vanilla JS at the bottom of `<body>` for the mobile nav drawer and hero role typewriter animation.
+- **Scripting:** Inline vanilla JS at the bottom of `<body>` for the mobile nav drawer and hero role typewriter animation, plus the official `@n8n/chat` ES module CDN widget (`https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js` + `style.css`) for the lower-right floating AI agent chat.
 
 ---
 
@@ -94,10 +94,13 @@ KHEMPORT-main/
 ## 6. Interactive Behavior (`<script>` in `index.html`)
 - **Mobile Navigation:** `.menu-toggle` toggles `.open` on `#nav-links`, updates `aria-expanded`, swaps `☰` / `×`, and auto-closes when any nav link is clicked.
 - **Role Typewriter:** Cycles `#role-text` through `['AI Agent Builder', 'n8n Automation Expert', 'Web Developer']` (55ms delete, 95ms type, 1300ms hold after typing, 1600ms initial delay). Disabled when `prefers-reduced-motion: reduce` matches.
+- **Floating AI Agent Chat (`@n8n/chat`):** Lower-right floating launcher and chat window connected to `https://khemludev.app.n8n.cloud/webhook/7f1f19cf-a967-411b-931e-db6e40cb92cd/chat`, themed with `--chat--*` CSS custom properties (`#a878ec` accent, `#111034` header, `Manrope` font). Requires `khemshop.com` (and any preview origin) to be listed in the n8n Chat Trigger node's Allowed Origins (CORS).
 
 ---
 
 ## 7. Changelog & Maintenance Notes
+- **2026-11-27 — Added n8n Floating Chat Widget:**
+  - Embedded `@n8n/chat` stylesheet and ES module in `index.html` wired to `https://khemludev.app.n8n.cloud/webhook/7f1f19cf-a967-411b-931e-db6e40cb92cd/chat` in the lower-right corner, styled to match the portfolio's dark indigo/violet theme.
 - **2026-11-27 — Dual-Skill Structure & AI Customer Bot Screenshot:**
   - Split skills and projects into two explicit tracks: **01 · AI Agents & Automation** (primary) and **02 · Web Development** (secondary) in both `#work` and `#services` (`.skills-two`).
   - Attached n8n workflow screenshot (`assets/ai-customer-bot.png`) to the **AI Customer Bot** project card and updated stack details (`DeepSeek`, `Pinecone RAG`, `OpenAI Embeddings`).
