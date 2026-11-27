@@ -1,0 +1,108 @@
+# Project Memory — Khemraj Sahu Portfolio (`KHEMPORT`)
+
+## 1. Overview
+- **Owner:** Khemraj Sahu (`Khemu's Portfolio.`)
+- **Two Core Skills:**
+  1. **AI Agents & Automation (Primary Freelance Focus):** n8n workflows, RAG customer bots, DeepSeek & OpenAI integrations, Pinecone vector stores, and automated pipelines.
+  2. **Web Development (Secondary Skill):** Full-stack web apps, clean responsive interfaces, interactive motion, and Python-backed digital products.
+- **Purpose:** Personal portfolio website organized around these two core skill tracks, showcasing projects, capabilities, and contact/GitHub links.
+- **Location / Availability:** India · Open to remote / Available for freelance (`2024 — 2026`).
+- **Custom Domain:** `khemshop.com` (configured via `CNAME`, structured for static hosting such as GitHub Pages).
+- **GitHub Profile:** `https://github.com/khemraj8345`
+
+---
+
+## 2. File Structure
+```text
+KHEMPORT-main/
+├── CNAME                                   # Custom domain: khemshop.com
+├── README.md                               # Minimal placeholder ("this is the my portfolio site")
+├── index.html                              # Entire site: HTML, inline CSS, and inline vanilla JS
+├── memory.md                               # Project memory and technical reference
+└── assets/
+    ├── ai-customer-bot.png                 # n8n RAG AI Customer Bot workflow screenshot
+    ├── favicon.svg                         # 64x64 SVG monogram icon (#111034 bg, #f7f5ff & #a878ec)
+    └── khemraj-portrait-optimized.jpg      # Hero portrait image of Khemraj Sahu
+```
+
+---
+
+## 3. Tech Stack & Architecture
+- **Architecture:** Zero-build, single-file static site (`index.html`, 134 lines) with no framework, bundler, or external JS libraries.
+- **Styling:** Inline `<style>` using CSS custom properties, CSS Grid, Flexbox, image thumbnail for the AI Customer Bot project, and pure-CSS illustrations for the web projects.
+- **Typography:** Google Fonts (`Manrope` 400/500/600/700/800 and `DM Mono` 400/500) loaded via `@import`, plus system serif (`Georgia, 'Times New Roman', serif`) for italic emphasis.
+- **Scripting:** Inline vanilla JS at the bottom of `<body>` for the mobile nav drawer and hero role typewriter animation.
+
+---
+
+## 4. Design System & Styling Notes
+- **Theme:** Deep indigo/midnight dark theme layered as overrides in `<style>` on top of an earlier light-paper base theme.
+  - `--paper` (page background): `#080722`
+  - Nav & `#about` section surface: `#111034`
+  - `--ink` (primary text): `#f7f5ff`
+  - `--muted` (secondary text): `#a8a4c5`
+  - `--line` (borders/dividers): `#302c59`
+  - Accent (`--green` variable repurposed to violet): `#a878ec`
+  - Contact box: Diagonal gradient (`#241b4a` → `#352354` → `#202849`) with `#d5c5ff` CTA pill.
+- **Project & Skill Organization:**
+  - `#work` separates projects under `.skill-group-head` sections (`AI Agents & Automation` first, `Web Development` second).
+  - `.project-featured` spans full width (`grid-column: 1 / -1`) in a horizontal 2-column split on desktop (`> 700px`), displaying `assets/ai-customer-bot.png` inside `.bot-art` (`background: #1c1c1e`, `object-fit: contain`).
+  - `#services` uses `.skills-two` (2-column grid on desktop, 1-column on mobile) with two distinct `.skill-card` blocks (`01 AI Agents & Automation`, `02 Web Development`).
+- **Responsive Breakpoint:** `@media (max-width: 700px)` collapses `.project-featured`, `.projects`, and `.skills-two` into single columns and switches navigation to a toggleable dropdown drawer (`.nav-links.open`).
+- **Accessibility & Motion:**
+  - Respects `@media (prefers-reduced-motion: reduce)` in both CSS and JS.
+  - Uses `aria-expanded` / `aria-controls` on `.menu-toggle`, descriptive `alt` on project/hero images, `role="img"` + `aria-label` on CSS art cards, and `:focus-visible` outlines on `.project-link`.
+
+---
+
+## 5. Page Sections & Content Map (`index.html`)
+1. **Header (`.nav`)**: Brand link (`#top`), nav links (`Home`, `About`, `Services`, `Projects`), mobile `.menu-toggle` button. (Note: `.nav-cta` "Let's talk" exists in HTML but is hidden via `display: none` in the dark-theme CSS override.)
+2. **Hero (`#top`)**:
+   - Status eyebrow with green dot: `AI Agents & n8n Automation · Web Development`
+   - Headline: `Hi, my name is Khemraj / I'm a passionate / [rotating role]|` (starts on `AI Agent Builder`)
+   - Action buttons: `Explore my work` (`#work`) and `Visit GitHub ↗` (`https://github.com/khemraj8345`)
+   - Visual: `assets/khemraj-portrait-optimized.jpg` framed with an asymmetric rounded corner (`border-radius: 9px 9px 95px 9px`) and offset violet border.
+3. **Meta Row**: `Selected work` · `2024 — 2026` · `India · Open to remote`
+4. **Featured Projects (`#work`)**:
+   - **Skill 01 · Primary — AI Agents & Automation**
+     - **01 / AI Agent · n8n — AI Customer Bot** (`AI & N8N`, `.project-featured`)
+       - Demo Video URL (Loom): `https://www.loom.com/share/7a756b3de934494ba978bc82e35ee8ab`
+       - Visual: `assets/ai-customer-bot.png` (n8n workflow: `When chat message received` → `AI Agent` connected to `DeepSeek Chat Model` and `Pinecone Vector Store1` + `Embeddings OpenAI1`) with `▶ WATCH LOOM DEMO` badge.
+       - Tags: `n8n Automation`, `DeepSeek`, `Pinecone RAG`, `OpenAI Embeddings`
+   - **Skill 02 — Web Development**
+     - **02 / Healthcare Platform — Hospital Management Platform** (`FULL STACK`)
+       - Live URL: `https://khemraj8345.github.io/bunsal-nursing-home/`
+       - Visual: Pure-CSS patient portal UI mockup (`.hospital-card`).
+       - Tags: `Patient experience`, `Appointment booking`, `Admin dashboard`
+     - **03 / Brand Experience — Amul Cool — Animated Website** (`WEB DESIGN`)
+       - Live URL: `https://amul-cool-xi.vercel.app/#top`
+       - Visual: Pure-CSS illustrated Amul Cool bottle with sunray rings and leaf (`.milk-card`, `.sunray`, `.float-leaf`).
+       - Tags: `Web animation`, `Brand storytelling`, `Responsive design`
+5. **About & Services (`#about`, `#services`)**:
+   - Heading: `Curious by nature. Builder by choice.`
+   - Copy: Highlights both core skills (AI Agents & n8n Automation as primary freelance focus, alongside full-stack Web Development).
+   - Two Separate Skill Cards (`.skills-two` / `#services`):
+     - `01` **AI Agents & Automation** — n8n workflows, RAG customer bots, DeepSeek & OpenAI integrations, Pinecone vector stores, and automated pipelines.
+     - `02` **Web Development** — Full-stack web apps, clean responsive interfaces, interactive motion, and Python-backed digital products.
+6. **Contact (`#contact`)**:
+   - Heading: `Let's make something useful.`
+   - CTA pill: `Get in touch ↗` (`href="mailto:"`).
+7. **Footer**: `© 2026 Khemraj Sahu`, `Back to top ↑`, `Made with care.`
+
+---
+
+## 6. Interactive Behavior (`<script>` in `index.html`)
+- **Mobile Navigation:** `.menu-toggle` toggles `.open` on `#nav-links`, updates `aria-expanded`, swaps `☰` / `×`, and auto-closes when any nav link is clicked.
+- **Role Typewriter:** Cycles `#role-text` through `['AI Agent Builder', 'n8n Automation Expert', 'Web Developer']` (55ms delete, 95ms type, 1300ms hold after typing, 1600ms initial delay). Disabled when `prefers-reduced-motion: reduce` matches.
+
+---
+
+## 7. Changelog & Maintenance Notes
+- **2026-11-27 — Dual-Skill Structure & AI Customer Bot Screenshot:**
+  - Split skills and projects into two explicit tracks: **01 · AI Agents & Automation** (primary) and **02 · Web Development** (secondary) in both `#work` and `#services` (`.skills-two`).
+  - Attached n8n workflow screenshot (`assets/ai-customer-bot.png`) to the **AI Customer Bot** project card and updated stack details (`DeepSeek`, `Pinecone RAG`, `OpenAI Embeddings`).
+- **Remaining Gaps:**
+  - **Incomplete Contact Link:** The `#contact` CTA pill still has `href="mailto:"` with no email address populated.
+  - **Layered CSS Debt:** `index.html` retains older light-theme CSS rules overridden by dark-theme rules.
+  - **Typing Caret Styling:** `.typing-caret` has no dedicated CSS blink animation rule.
+  - **Documentation:** `README.md` currently contains only a single-line description.
